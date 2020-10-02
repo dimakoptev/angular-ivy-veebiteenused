@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiComponent implements OnInit {
 
-  apiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+  apiUrl = 'https://et.wikipedia.org/api/rest_v1/page/related/';
+  searchApi = 'https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json'
   searchResult: any;
   searchImage : string;
 
@@ -31,5 +32,8 @@ export class ApiComponent implements OnInit {
       this.searchImage = this.searchResult.thumbnail ?
       this.searchResult.thumbnail.source: undefined;
     })
+  }
+  getImageUrl(page){
+    return page.thumbnail ? page.thumbnail.source: undefined;
   }
 }

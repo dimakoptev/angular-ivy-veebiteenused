@@ -1,11 +1,15 @@
 <input #search /> 
 <button (click)="startSearch()" >Search!</button> <hr>
 <div *ngIf="searchResult">
-  <h2>{{ searchResult.title }}</h2>
-  <a [href]="searchResult.content_urls.desktop.page"> 
-    {{searchResult.description}} </a>
-  <img [src]="searchImage"/>
-  <p>{{searchResult.extract}}</p>
-  <h4>{{searchResult.timestamp | date}}</h4>
-
+  <div *ngFor="let result of searchResult.pages">
+    <h2>{{ searchResult.title }}</h2>
+    <img [src]="getImageUrl(result)" [alt]="searchResult.title"/>
+    <p>{{searchResult.extract}}</p>
+    <h4>{{searchResult.timestamp | date}}</h4>
+  </div>
 </div>
+
+
+
+  <!-- <a [href]="searchResult.content_urls.desktop.page"> 
+    {{searchResult.description}} </a> <br> -->
