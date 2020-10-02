@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ApiComponent implements OnInit {
 
   apiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
-  searchResult: any = {};
+  searchResult: any;
   searchImage : string;
 
   @ViewChild('search') searchBox: ElementRef<HTMLInputElement>;
@@ -21,7 +21,11 @@ export class ApiComponent implements OnInit {
   startSearch () {
     const searchTerm = this.searchBox.nativeElement.value;
 
-    this.http.get( this.apiUrl + searchTerm ).subscribe((res)=> {
+    this.http.get( this.apiUrl + searchTerm, {
+      headers: {
+        "Accept-Language": "et_ee"
+      }
+    } ).subscribe((res)=> {
       console.log(res);
       this.searchResult = res;
       this.searchImage = this.searchResult.thumbnail ?

@@ -1,7 +1,9 @@
-<input #search /> <hr>
-<button (click)="startSearch()" >Search!</button>
+<input #search /> 
+<button (click)="startSearch()" >Search!</button> <hr>
 <div *ngIf="searchResult">
   <h2>{{ searchResult.title }}</h2>
+  <a [href]="searchResult.content_urls.desktop.page"> 
+    {{searchResult.description}} </a>
   <img [src]="searchImage"/>
   <p>{{searchResult.extract}}</p>
   <h4>{{searchResult.timestamp | date}}</h4>
