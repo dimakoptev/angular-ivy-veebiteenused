@@ -1,3 +1,6 @@
-<p>
-api works!
-</p>
+<input #search /><hr>
+<button (click)="startSearch()" >Search!</button>
+<div>
+  <h2>{{ searchResult.title }}</h2>
+  <p>{{searchResult.extract}}</p>
+</div>
