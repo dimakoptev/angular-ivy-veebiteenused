@@ -1,6 +1,6 @@
-<label>year  </label><input #search /> <br>
-<label>month </label><input #search1 /> <br>
-<label>day   </label><input #search2 /> <br>
+<input #search placeholder="Year" /> <br>
+<input #search1 placeholder="Month" /> <br>
+<input #search2 placeholder="Day" /> <br>
 
 <button (click)="startSearch()" >Search!</button> <hr>
 <div *ngIf="searchList">
@@ -9,7 +9,9 @@
 
 <h2>{{result.title}}</h2>
 <p>{{ result.description }}</p>
-<img [src]="searchImage" [alt]="searchResult.title"/>
+<img [src]="getImageUrl(result)" [alt]="searchResult.title"/>
+</div>
+</div>
 
 
 <!-- <div *ngIf="searchResult">
@@ -19,8 +21,7 @@
     <p>{{searchResult.extract}}</p>
     <h4>{{searchResult.timestamp | date}}</h4>
   </div> -->
-</div>
-</div>
+
 
 
   <!-- <a [href]="searchResult.content_urls.desktop.page"> 
