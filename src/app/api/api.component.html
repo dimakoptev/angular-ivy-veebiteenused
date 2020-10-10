@@ -1,15 +1,20 @@
+<!-- input search boxes -->
 <input #search placeholder="Year" /> <br>
 <input #search1 placeholder="Month" /> <br>
 <input #search2 placeholder="Day" /> <br>
 
+<!-- otsingu start -->
 <button (click)="startSearch()" >Search!</button> <hr>
+<!-- if on vajutatud -->
 <div *ngIf="searchList">
+<!-- for et teha seda niikaua, kuni otsingu lõpuni -->
 <div *ngFor="let result of searchList.articles">
 
-
+<!-- mida otsime ja määrame , millega tegu ja mis suuruses nt: h2 -->
 <h2>{{result.title}}</h2>
 <p>{{ result.description }}</p>
-<img [src]="getImageUrl(result)" [alt]="searchResult.title"/>
+<img [src]="getImageUrl(result)" [alt]="result.title"/>
+<h4>{{result.timestamp | date}}</h4>
 </div>
 </div>
 
@@ -21,8 +26,6 @@
     <p>{{searchResult.extract}}</p>
     <h4>{{searchResult.timestamp | date}}</h4>
   </div> -->
-
-
 
   <!-- <a [href]="searchResult.content_urls.desktop.page"> 
     {{searchResult.description}} </a> <br> -->

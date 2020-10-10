@@ -8,13 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiComponent implements OnInit {
 
-  apiUrl = 'https://et.wikipedia.org/api/rest_v1/feed/featured/';
+  apiUrl = 'https://et.wikipedia.org/api/rest_v1/feed/featured/';//siit otsime
   searchApi = 'https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json'
   searchResult: any;
-  searchImage : string;
+  searchImage : string;//määrame sisu
   searchList : any;
+  timestamp: any;
+  
 
-  @ViewChild('search') searchBox: ElementRef<HTMLInputElement>;
+  @ViewChild('search') searchBox: ElementRef<HTMLInputElement>;//deklareerime elemendid
   @ViewChild('search1') searchBox1: ElementRef<HTMLInputElement>;
   @ViewChild('search2') searchBox2: ElementRef<HTMLInputElement>;
 
@@ -26,18 +28,24 @@ export class ApiComponent implements OnInit {
   startSearch () {
     const searchTerm = this.searchBox.nativeElement.value +"/"+ 
     this.searchBox1.nativeElement.value +"/"+ 
-    this.searchBox2.nativeElement.value;
-
+    this.searchBox2.nativeElement.value;//otsing koosneb kolmest tegurist
 
     this.http.get( this.apiUrl + searchTerm).subscribe((res)=> {
       console.log(res);
       this.searchResult = res;
       this.searchList = this.searchResult.mostread;
-      this.searchImage = this.searchResult.thumbnail ? this.searchResult.thumbnail.source: undefined;
-      console.log(this.searchList)
+      this.searchImage = this.searchResult.thumbnail ? this.searchResult.thumbnail.source: undefined;//? tähendab or statementi
+      this.timestamp = this.searchResult.date;
+      //mul oli pikalt probleem timestamp funktsiooniga, kuid peale deklareerimist on korras
+      //kasutasin quick fix meetodit
     })
   }
-  getImageUrl(page){
+  getImageUrl(page){//seda ei tea, miks see peab startseach-ist väljas olema
     return page.thumbnail ? page.thumbnail.source: undefined;
   }
 }
+
+
+
+
+// console.log(this.searchList);
