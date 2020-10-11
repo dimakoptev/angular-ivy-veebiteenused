@@ -21,6 +21,7 @@ export class ApiComponent implements OnInit {
   @ViewChild('search2') searchBox2: ElementRef<HTMLInputElement>;
 
 
+
   constructor(public http: HttpClient) {  }
 
   ngOnInit() { }
@@ -40,6 +41,25 @@ export class ApiComponent implements OnInit {
       //kasutasin quick fix meetodit
     })
   }
+
+
+   startSearch2 () {
+     
+    this.timestamp =  new Date().getTime();
+    let searchTerm = this.timestamp;
+    
+
+    this.http.get( this.apiUrl + searchTerm).subscribe((res)=> {
+      console.log(res);
+      this.searchResult = res;
+      this.searchList = this.searchResult.mostread;
+      this.searchImage = this.searchResult.thumbnail ? this.searchResult.thumbnail.source: undefined;//? tähendab or statementi
+      this.timestamp = this.searchResult.date;
+      //mul oli pikalt probleem timestamp funktsiooniga, kuid peale deklareerimist on korras
+      //kasutasin quick fix meetodit
+    })
+  }
+
   getImageUrl(page){//seda ei tea, miks see peab startseach-ist väljas olema
     return page.thumbnail ? page.thumbnail.source: undefined;
   }
