@@ -19,6 +19,9 @@ export class ApiComponent implements OnInit {
   @ViewChild('search') searchBox: ElementRef<HTMLInputElement>;//deklareerime elemendid
   @ViewChild('search1') searchBox1: ElementRef<HTMLInputElement>;
   @ViewChild('search2') searchBox2: ElementRef<HTMLInputElement>;
+year: any;
+month: any;
+day: any;
 
 
 
@@ -42,12 +45,23 @@ export class ApiComponent implements OnInit {
     })
   }
 
-
-   startSearch2 () {
-     
-    this.timestamp =  new Date().getTime();
-    let searchTerm = this.timestamp;
+  startSearch2 () {
     
+    // this.timestamp =  new Date().getTime();
+    // console.log(this.timestamp.getYear());
+    // console.log(this.timestamp.getMonth());
+    // console.log(this.timestamp.getDate());
+    
+    const searchTerm = this.year.value +"/"+ this.month.value +"/"+ this.day.value;
+
+    //const moonLanding = new Date('July 20, 69 00:20:18');
+    //console.log(moonLanding.getMonth()); 
+    // (January gives 0)
+
+// expected output: 6
+    //this.timestamp =  new Date().getTime();
+    //var theBigDay = new Date();
+    //theBigDay.setFullYear(yearValue["/" monthValue["/" dateValue]]);
 
     this.http.get( this.apiUrl + searchTerm).subscribe((res)=> {
       console.log(res);
@@ -63,6 +77,9 @@ export class ApiComponent implements OnInit {
   getImageUrl(page){//seda ei tea, miks see peab startseach-ist väljas olema
     return page.thumbnail ? page.thumbnail.source: undefined;
   }
+
+
+
 }
 
 
