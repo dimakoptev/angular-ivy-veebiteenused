@@ -8,20 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiComponent implements OnInit {
 
-  apiUrl = 'https://et.wikipedia.org/api/rest_v1/feed/featured/';//siit otsime
-  searchApi = 'https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json'
+  apiUrl = 'https://en.wikipedia.org/api/rest_v1/feed/featured/';//siit otsime
   searchResult: any;
   searchImage : string;//määrame sisu
   searchList : any;
   timestamp: any;
+  year: any;
+month: any;
+day: any;
   
 
   @ViewChild('search') searchBox: ElementRef<HTMLInputElement>;//deklareerime elemendid
   @ViewChild('search1') searchBox1: ElementRef<HTMLInputElement>;
   @ViewChild('search2') searchBox2: ElementRef<HTMLInputElement>;
-year: any;
-month: any;
-day: any;
+
 
 
 
@@ -47,21 +47,13 @@ day: any;
 
   startSearch2 () {
     
-    // this.timestamp =  new Date().getTime();
-    // console.log(this.timestamp.getYear());
-    // console.log(this.timestamp.getMonth());
+    this.timestamp =  new Date(Date.now());
+    // console.log(this.timestamp.getFullYear());
+    // console.log(this.timestamp.getMonth()+1);
     // console.log(this.timestamp.getDate());
+    const month = this.timestamp.getMonth()+1;
     
-    const searchTerm = this.year.value +"/"+ this.month.value +"/"+ this.day.value;
-
-    //const moonLanding = new Date('July 20, 69 00:20:18');
-    //console.log(moonLanding.getMonth()); 
-    // (January gives 0)
-
-// expected output: 6
-    //this.timestamp =  new Date().getTime();
-    //var theBigDay = new Date();
-    //theBigDay.setFullYear(yearValue["/" monthValue["/" dateValue]]);
+    const searchTerm = this.timestamp.getFullYear() +"/"+ month +"/"+ this.timestamp.getDate() ;
 
     this.http.get( this.apiUrl + searchTerm).subscribe((res)=> {
       console.log(res);
@@ -77,9 +69,6 @@ day: any;
   getImageUrl(page){//seda ei tea, miks see peab startseach-ist väljas olema
     return page.thumbnail ? page.thumbnail.source: undefined;
   }
-
-
-
 }
 
 

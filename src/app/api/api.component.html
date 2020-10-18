@@ -7,7 +7,7 @@
 <button (click)="startSearch()" >Search!</button> <hr>
 <button (click)="startSearch2()" >Todays search information</button> <hr>
 <!-- if on vajutatud -->
-<div *ngIf="searchList">
+<div *ngIf="searchList"> 
 <!-- for et teha seda niikaua, kuni otsingu lõpuni -->
 <div *ngFor="let result of searchList.articles">
 
@@ -15,6 +15,7 @@
 <h2>{{result.title}}</h2>
 <p>{{ result.description }}</p>
 <img [src]="getImageUrl(result)" [alt]="result.title"/>
+<!-- <p>rank {{ result.rank }}</p>  -->
 <h4>{{result.timestamp | date}}</h4>
 </div>
 </div>
